@@ -57,7 +57,7 @@ https://data.cityofnewyork.us/api/odata/v4/k397-673e?$filter=fiscal_year eq 2025
 - The screenshots in this repo are a **snapshot** from the date below, so figures may differ slightly after a refresh.
 - Refreshing in Power BI Service on a schedule would need a gateway-free cloud connection and a published workspace; this portfolio version refreshes from Power BI Desktop.
 
-**Snapshot date of screenshots:** *add the date you last refreshed*
+**Snapshot date of screenshots:** *4 November 2026*
 
 ---
 
@@ -248,14 +248,8 @@ Power BI · Power Query (M) · DAX · OData / API connection · Data cleaning ·
 
 ---
 
-## 14. Related Work
+## 14. Author
 
-Companion project: **Operational Reporting & SLA Monitoring Dashboard** *(add link)*. *Why link it:* together they show breadth, with operational and SLA reporting on one side and payroll / HCM analytics on the other.
-
----
-
-## 15. Author
-
-**Your Name** · [LinkedIn](#) · [Portfolio](#)
+**Your Name** · Sayyed Hamza
 
 *Data © City of New York, used under NYC Open Data terms. This is an independent portfolio project and is not affiliated with the City of New York.*
