@@ -1,0 +1,17 @@
+# Raw data extracts: the dataset is large and is pulled live from the source
+*.csv
+*.xlsx
+*.xls
+*.parquet
+
+# Power BI temporary and backup files
+*.pbi.bak
+*.pbix.bak
+~$*
+*.tmp
+.pbi/
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
