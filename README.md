@@ -38,7 +38,7 @@
 - **Public safety drives overtime:** Police, Fire and Correction are about 69% of overtime pay.
 - **Dependence differs from dollars:** Correction (31.87%) and Fire (26.20%) lean on overtime more than Police (20.58%).
 
-**Data snapshot:** *add the date you last refreshed*  ·  **Source:** [NYC Open Data, Citywide Payroll](https://data.cityofnewyork.us/City-Government/Citywide-Payroll-Data-Fiscal-Year-/k397-673e), Fiscal Year 2025
+**Data snapshot:** *4 November 2026*  ·  **Source:** [NYC Open Data, Citywide Payroll](https://data.cityofnewyork.us/City-Government/Citywide-Payroll-Data-Fiscal-Year-/k397-673e), Fiscal Year 2025
 
 ---
 
@@ -281,8 +281,7 @@ Power BI · Power Query (M) · DAX · OData / API connection · Data cleaning ·
 
 ## Author
 
-**Your Name** · [LinkedIn](#) · [Portfolio](#)
+**Your Name** · Sayyed Hamza
 
-Also see my companion project, **Operational Reporting & SLA Monitoring Dashboard** *(add link, or delete this line)*.
 
 *Data © City of New York, used under NYC Open Data terms. This is an independent portfolio project and is not affiliated with the City of New York.*
