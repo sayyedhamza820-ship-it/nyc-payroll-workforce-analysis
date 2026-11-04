@@ -1,0 +1,90 @@
+// =====================================================================
+// NYC Payroll Operations Dashboard (FY2025) - DAX Measures
+// Model table: Payroll
+// 13 measures, grouped by purpose.
+// Why measures (not calculated columns): they respond to slicers and
+// cross-filtering and add nothing to the model size.
+// =====================================================================
+
+
+// ---------------------------------------------------------------------
+// 1. VOLUME
+// ---------------------------------------------------------------------
+
+// One row = one employee/title/agency record, so this approximates headcount.
+Payroll Records = COUNTROWS ( Payroll )
+
+
+// ---------------------------------------------------------------------
+// 2. COST
+// ---------------------------------------------------------------------
+
+// Regular gross pay: the base building block of cost.
+Regular Pay = SUM ( Payroll[Regular Gross Paid] )
+
+// Overtime pay: the most volatile and controllable pay component.
+Overtime Pay = SUM ( Payroll[Total OT Paid] )
+
+// Total cost = regular + overtime ("Other Pay" was not loaded).
+Total Payroll = [Regular Pay] + [Overtime Pay]
+
+// Each agency's share of total payroll. ALL() removes the agency filter
+// from the denominator so the share is measured against the whole.
+Payroll % of Total =
+DIVIDE (
+    [Total Payroll],
+    CALCULATE ( [Total Payroll], ALL ( Payroll[Agency Name] ) ),
+    0
+)
+
+
+// ---------------------------------------------------------------------
+// 3. OVERTIME
+// ---------------------------------------------------------------------
+
+// Overtime hours worked: the effort behind the overtime cost.
+Total OT Hours = SUM ( Payroll[OT Hours] )
+
+// Overtime as a share of payroll: lets large and small agencies be
+// compared fairly, which dollar totals cannot do.
+OT % of Payroll = DIVIDE ( [Overtime Pay], [Total Payroll], 0 )
+
+// Average cost of one overtime hour: hints at rate and role mix.
+Avg OT Pay per OT Hour = DIVIDE ( [Overtime Pay], [Total OT Hours], 0 )
+
+// Records that include any overtime, and their share of all records:
+// shows how widespread overtime is.
+Records With OT =
+CALCULATE ( [Payroll Records], Payroll[Total OT Paid] > 0 )
+
+% Records With OT = DIVIDE ( [Records With OT], [Payroll Records], 0 )
+
+
+// ---------------------------------------------------------------------
+// 4. SALARY
+// ---------------------------------------------------------------------
+
+// Annual Salary is blank for non-annual pay bases and AVERAGE skips blanks,
+// so this compares like-for-like annual salaries only (about 60% of records).
+Avg Annual Salary = AVERAGE ( Payroll[Annual Salary] )
+
+// Count of records that have an annual salary (per-annum staff).
+Annual Salary Records = COUNT ( Payroll[Annual Salary] )
+
+// Average salary shown only for titles with 100+ annual-salaried records.
+// A minimum sample size stops tiny titles dominating a Top N ranking.
+// (A plain visual filter on record count clashes with Top N and empties
+// the chart, which is why this is a measure.)
+Avg Salary (100+ Records) =
+IF ( [Annual Salary Records] >= 100, [Avg Annual Salary] )
+
+
+// ---------------------------------------------------------------------
+// FORMAT STRINGS (set in Power BI: Measure tools > Format)
+//   Currency ($):  Total Payroll, Regular Pay, Overtime Pay,
+//                  Avg Annual Salary, Avg OT Pay per OT Hour,
+//                  Avg Salary (100+ Records)
+//   Percentage:    OT % of Payroll, % Records With OT, Payroll % of Total
+//   Whole number:  Payroll Records, Records With OT, Total OT Hours,
+//                  Annual Salary Records
+// ---------------------------------------------------------------------
